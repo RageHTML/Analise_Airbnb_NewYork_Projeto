@@ -26,4 +26,12 @@ renomear = {
 }
 
 df.rename(columns=renomear, inplace=True)
-print(df.dtypes)
+
+#print(df.dtypes)
+
+# Quantas linhas e colunas? 
+print(f"O dataset possui: {df.shape[1]} Colunas")
+print(f"O dataset possui: {df.shape[0]} Linhas")
+
+# Descobrir Valores Ausentes e calcular a porcetagem da coluna vazia 
+print(f"{(df.isnull().sum() / df.shape[0] * 100).sort_values(ascending=False)}")
