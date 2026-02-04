@@ -1,4 +1,5 @@
 import pandas as pd 
+import matplotlib as plt
 
 df = pd.read_csv("listings.csv")
 
@@ -23,11 +24,17 @@ renomear = {
     'availability_365':'dias_disponiveis_ano',
     'number_of_reviews_ltm':'avaliacoes_ultimos_12_meses',
     'license':'licensa'
-}
+} 
 
 df.rename(columns=renomear, inplace=True)
 
-#print(df.dtypes)
+# transformando valores Nan em 0
+colunas_fillna = [
+    "avaliacoes_por_mes",
+    "ultima_avaliacao",
+    "licensa"
+]
+df[colunas_fillna] = df[colunas_fillna].fillna(0)
 
 # Quantas linhas e colunas? 
 print(f"O dataset possui: {df.shape[1]} Colunas")
@@ -35,3 +42,5 @@ print(f"O dataset possui: {df.shape[0]} Linhas")
 
 # Descobrir Valores Ausentes e calcular a porcetagem da coluna vazia 
 print(f"{(df.isnull().sum() / df.shape[0] * 100).sort_values(ascending=False)}")
+
+
